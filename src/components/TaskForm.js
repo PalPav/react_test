@@ -3,18 +3,32 @@ import React, {Component} from 'react';
 class TaskForm extends Component {
     constructor(props) {
         super(props);
-        this.addTask = this.addTask.bind(this);
+        this.state = {
+            inputValue: ''
+        };
     }
-    addTask() {
-        console.log(this.props.list);
-    }
+
     render() {
         return (
             <div className="todo-form">
-                <input name='taskName'/>
-                <button type='button' onClick={this.addTask}>+</button>
+                <input value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} name='taskName'/>
+                <button type='button' onClick={() => this.addTask()}>+</button>
             </div>
         );
+    }
+
+    addTask() {
+        this.props.addTask(this.state.inputValue);
+
+        this.setState({
+            inputValue: ''
+        });
+    }
+
+    updateInputValue(evt) {
+        this.setState({
+            inputValue: evt.target.value
+        });
     }
 }
 

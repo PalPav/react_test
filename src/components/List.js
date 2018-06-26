@@ -5,8 +5,13 @@ class List extends Component {
     render() {
         return (
             <div className="items-list">
-                {this.props.list.map(function(item, index, list){
-                    return (<Item key={index} index={index} item={item} list={list}/>);
+                {this.props.list.map((item, index) => {
+                    return (
+                        <Item key={'list_element_' + index}
+                              item={item}
+                              onClick={()=>this.props.removeTask(index)}
+                        />
+                    );
                 })}
             </div>
         );
